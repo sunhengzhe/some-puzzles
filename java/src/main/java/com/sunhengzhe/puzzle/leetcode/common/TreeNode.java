@@ -11,11 +11,15 @@ public class TreeNode {
         val = x;
     }
 
-    public String print() {
+    public static String print(TreeNode root) {
+        if (root == null) {
+            return "[]";
+        }
+
         String output = "[";
 
         LinkedList<TreeNode> queue = new LinkedList<>();
-        queue.add(this);
+        queue.add(root);
 
         while (!queue.isEmpty()) {
             TreeNode node = queue.remove();

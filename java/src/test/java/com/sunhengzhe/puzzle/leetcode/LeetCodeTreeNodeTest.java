@@ -15,6 +15,6 @@ public class LeetCodeTreeNodeTest {
         root.right = new TreeNode(5);
         root.right.right = new TreeNode(6);
 
-        assertEquals("[1,2,5,3,null,null,6,null,4]", root.print());
+        assertEquals("[1,2,5,3,null,null,6,null,4]", TreeNode.print(root));
     }
 }
