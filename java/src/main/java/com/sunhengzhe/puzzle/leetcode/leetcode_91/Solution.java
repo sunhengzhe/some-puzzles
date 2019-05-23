@@ -2,36 +2,25 @@ package com.sunhengzhe.puzzle.leetcode.leetcode_91;
 
 public class Solution {
     public int numDecodings(String s) {
-        if (s.isEmpty()) {
+        int n = s.length();
+        if (n == 0) {
             return 0;
         }
 
-        if (s.length() == 1) {
-            return s.equals("0") ? 0 : 1;
-        }
+        int[] table = new int[n + 1];
+        table[n]  = 1;
+        table[n - 1] = s.charAt(n-1) != '0' ? 1 : 0;
 
-        int[] table = new int[s.length() + 1];
-
-        table[0] = 1;
-        table[1] = 1;
-
-        for (int i = 2; i <= s.length(); i++) {
-            char curChar = s.charAt(i - 1);
-            char prevChar = s.charAt(i - 2);
-
-            if (curChar == 48) {
-                if (prevChar > 50) {
-                    table[i] = 0;
-                } else {
-                    table[i] = table[i - 2];
-                }
-            } else if (prevChar < 51 && curChar < 55) {
-                table[i] = table[i - 1] + table[i - 2];
+        for (int i = n - 2; i >= 0; i--) {
+            if (s.charAt(i) == '0') {
+                continue;
             } else {
-                table[i] = table[i - 1];
+                table[i] = (
+                        Integer.parseInt(s.substring(i ,i + 2)) <= 26
+                ) ? table[i + 1] + table[i + 2] : table[i + 1];
             }
         }
 
-        return table[s.length()];
+        return table[0];
     }
 }
